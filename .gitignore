@@ -1,0 +1,6 @@
+.dotnetcli/
+.vs/
+artifacts/
+bin/
+obj/
+*.user

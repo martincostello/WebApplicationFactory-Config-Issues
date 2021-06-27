@@ -5,8 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-// HACK Locally it decides to sometimes forget where WebApplication.CreateBuilder is for some reason
-var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
+// Fix naming conflict
+using WebApp = Microsoft.AspNetCore.Builder.WebApplication;
+var builder = WebApp.CreateBuilder(args);
 
 var app = builder.Build();
 

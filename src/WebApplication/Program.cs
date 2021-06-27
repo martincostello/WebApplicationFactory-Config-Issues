@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-var builder = WebApplication.CreateBuilder(args);
+// HACK Locally it decides to sometimes forget where WebApplication.CreateBuilder is for some reason
+var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 

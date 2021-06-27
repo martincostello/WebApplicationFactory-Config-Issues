@@ -6,27 +6,22 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseEndpoints((endpoints) =>
+app.MapGet("/api", (IConfiguration config, IHostEnvironment environment, IServiceProvider serviceProvider) =>
 {
-    endpoints.MapGet("/api", async (IConfiguration config, IHostEnvironment environment, IServiceProvider serviceProvider) =>
+    return new
     {
-        await Task.CompletedTask;
-
-        return new
-        {
-            configurations = serviceProvider.GetServices<IConfiguration>().Count(),
-            environment = environment.EnvironmentName,
-            message = config["Message"],
-            value = config["Value"],
-        };
-    });
+        configurations = serviceProvider.GetServices<IConfiguration>().Count(),
+        environment = environment.EnvironmentName,
+        message = config["Message"],
+        value = config["Value"],
+    };
 });
 
 app.Run();
